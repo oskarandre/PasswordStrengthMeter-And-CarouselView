@@ -4,10 +4,11 @@ import { View, Text, StyleSheet, Button, FlatList, Dimensions } from 'react-nati
 
 interface CarouselItem{
   items: Array<{ color: string }>;
-  visibleCount: number;
+  visibleCount?: number;
+  visualStyle? : string;
 }
 
-const CarouselView: React.FC<CarouselItem> = ({ items, visibleCount }) => {
+const CarouselView: React.FC<CarouselItem> = ({ items, visibleCount = 3, visualStyle = 'round' }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Get the width of the device
@@ -15,6 +16,9 @@ const CarouselView: React.FC<CarouselItem> = ({ items, visibleCount }) => {
 
   // Calculate the width for each item
   const itemSize = (width / 3)*0.5;
+
+  const maxHeight = 200;
+  const maxWidth =  142; //x*1.4 =200
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
@@ -47,8 +51,8 @@ const CarouselView: React.FC<CarouselItem> = ({ items, visibleCount }) => {
               style={[
                 styles.item,
                 {
-                  width: itemSize * scale,
-                  height: (itemSize*1.4) * scale,
+                  width: Math.min(itemSize * scale, maxWidth), 
+                  height: Math.min((itemSize * 1.4) * scale, maxHeight),
                   backgroundColor: item.color,
                   opacity,
                   
