@@ -14,7 +14,7 @@ const CarouselView: React.FC<CarouselItem> = ({ items, visibleCount }) => {
   const { width } = Dimensions.get('window');
 
   // Calculate the width for each item
-  const itemWidth = (width / 3)*0.5;
+  const itemSize = (width / 3)*0.5;
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
@@ -34,22 +34,37 @@ const CarouselView: React.FC<CarouselItem> = ({ items, visibleCount }) => {
 
   return (
     <View style={styles.container}>
-      {/* Carousel Content */}
-      <View style={{ flexDirection: 'row', overflow: 'hidden', width }}>
-      {visibleItems.map((item, index) => (
-          <View
-            key={index}
-            style={[styles.item, { width: itemWidth, backgroundColor: item.color }]}
-          />
-        ))}
-        
+      <View style={{ flexDirection: 'row', justifyContent: 'center', overflow: 'hidden', width }}>
+        {visibleItems.map((item, index) => {
+          const isCenter = index === Math.floor(visibleCount / 2);
+          const scale = isCenter ? 1 : 0.6;
+          const opacity = isCenter ? 1 : 0.6;
+  
+          // Inner return for mapping items
+          return (
+            <View
+              key={index}
+              style={[
+                styles.item,
+                {
+                  width: itemSize * scale,
+                  height: (itemSize*1.4) * scale,
+                  backgroundColor: item.color,
+                  opacity,
+                  
+                },
+              ]}
+            />
+          );
+        })}
       </View>
-
-      {/* Navigation Buttons */}
       <View style={styles.buttonContainer}>
-        <Button title="Previous" onPress={handlePrevious} />
-        <Button title="Next" onPress={handleNext}  />
-        
+        <View style={styles.buttonWrapper}>
+            <Button title="Previous" onPress={handlePrevious} />
+        </View>
+        <View style={styles.buttonWrapper}>    
+            <Button title="Next" onPress={handleNext} />
+        </View>
       </View>
     </View>
   );
@@ -74,10 +89,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     borderRadius: 8,
   },
+  buttonWrapper: {
+    flex: 1,
+    marginHorizontal: 5, 
+  },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 20,
-    width: '50%',
+    width: '40%',
   },
 });

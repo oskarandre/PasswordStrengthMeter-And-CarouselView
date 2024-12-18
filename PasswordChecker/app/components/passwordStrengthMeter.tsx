@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, TextInput, Text, StyleSheet } from 'react-native';
+import { View, TextInput, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import {Ionicons} from '@expo/vector-icons';
 
 interface PasswordStrengthMeterProps {
     length?: number;
@@ -17,10 +18,11 @@ const PasswordStrengthMeter: React.FC<PasswordStrengthMeterProps> = (
 
     const [password, setPassword] = useState('');
     const [isFocused, setIsFocused] = useState(false);
-    const [isStrong, setIsStrong] = useState(true);
+    const [secureTextEntry, setSecureTextEntry] = useState(true);
 
     const handleChange = (text: string) => {
         setPassword(text);
+        checkStrength();
     };
 
     const handleFocus = () => {
@@ -31,10 +33,14 @@ const PasswordStrengthMeter: React.FC<PasswordStrengthMeterProps> = (
         setIsFocused(false);
     };
 
+    const toggleSecureTextEntry = () => setSecureTextEntry(!secureTextEntry);
+
     const checkLength = () => password.length >= length;
     const checkCapitalLetter = () => /[A-Z]/.test(password);
     const checkNumeric = () => /[0-9]/.test(password);
     const checkSpecialCharacter = () => /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
+    const checkStrength = () => calculateStrength() >= 100;
+    
 
     const calculateStrength = () => {
         let criteriaMet = 0;
@@ -55,24 +61,31 @@ const PasswordStrengthMeter: React.FC<PasswordStrengthMeterProps> = (
         return (criteriaMet / numberOfCriteria) * 100;
     };
 
-
-
     return (
         <View style={styles.container}>
+            <View style={styles.inputContainer}>
             <TextInput
-                secureTextEntry
+                secureTextEntry = {true}
                 value={password}
                 onChangeText={handleChange}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
-                placeholder="Enter your password"
+                placeholder="Enter a password"
                 style={styles.input}
             />
+            <TouchableOpacity onPress={toggleSecureTextEntry} style={styles.icon}>
+                    <Ionicons name={secureTextEntry ? 'eye-off' : 'eye'} size={24} color="gray" />
+                </TouchableOpacity>
+            </View>
+
             {isFocused && (
                 <View style={styles.strengthContainer}>
+
                     <View style={styles.meter}>
                         <View style={[styles.meterFill, { width: `${calculateStrength()}%` }]} />
                     </View>
+                    <Text>{checkStrength() ? "Strong" : "Weak"}</Text>
+
                     <Text>Requirements:</Text>
                     <View>
                         <Text style={{ color: checkLength() ? 'green' : 'red' }}>
@@ -101,6 +114,10 @@ const PasswordStrengthMeter: React.FC<PasswordStrengthMeterProps> = (
 const styles = StyleSheet.create({
     container: {
         padding: 20,
+    },
+    inputContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     input: {
         padding: 10,
@@ -131,6 +148,10 @@ const styles = StyleSheet.create({
     meterFill: {
         height: '100%',
         backgroundColor: 'green',
+    },
+    icon: {
+        position: 'absolute',
+        right: 10,
     },
 });
 

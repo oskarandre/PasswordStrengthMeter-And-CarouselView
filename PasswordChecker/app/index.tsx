@@ -21,7 +21,7 @@ export default function Index() {
   );
 }
 
-const items = Array(10)
+const items = Array(4)
 .fill(null)
 .map((_, index) => ({
   color: `hsl(${(index * 40) % 360}, 70%, 50%)`, // Generate random colors
