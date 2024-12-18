@@ -41,8 +41,8 @@ const CarouselView: React.FC<CarouselItem> = ({ items, visibleCount = 3, visualS
       <View style={{ flexDirection: 'row', justifyContent: 'center', overflow: 'hidden', width }}>
         {visibleItems.map((item, index) => {
           const isCenter = index === Math.floor(visibleCount / 2);
-          const scale = isCenter ? 1 : 0.6;
-          const opacity = isCenter ? 1 : 0.6;
+          const scale = visualStyle === 'flat' ? 1 : isCenter ? 1 : 0.6;
+          const opacity = isCenter ? 1 : 0.3;
   
           // Inner return for mapping items
           return (

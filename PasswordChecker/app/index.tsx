@@ -12,7 +12,7 @@ export default function Index() {
         <PasswordStrengthMeter />
       </View>
       <View style={styles.content}>
-        <CarouselView items={items} visibleCount={3} />
+        <CarouselView items={items} visibleCount={3} visualStyle="flat"/>
       </View>
       <View style={styles.footer}>
         <Text style={styles.footerText}>Footer</Text>
@@ -50,10 +50,10 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   passwordContainer: {
-    flex: 5,
-    justifyContent: "center",
+    flex: 1,
     alignItems: "center",
     padding: 20,
+    zIndex: 1,
   },
   footer: {
     flex: 1,

@@ -7,14 +7,17 @@ interface PasswordStrengthMeterProps {
     capitalLetter?: boolean;
     numeric?: boolean;
     specialCharacter?: boolean;
+    displayStrength?: boolean;
+    displayBar?: boolean;
     showRequirements?: string;
-    showRequirementsAlways?: boolean;
 }
 const PasswordStrengthMeter: React.FC<PasswordStrengthMeterProps> = (
     { length = 8,
         capitalLetter = true,
         numeric = false,
         specialCharacter = true,
+        displayStrength = true,
+        displayBar = true,
         showRequirements = 'onFocus',
 
     }) => {
@@ -38,10 +41,10 @@ const PasswordStrengthMeter: React.FC<PasswordStrengthMeterProps> = (
 
     const handleShowRequirements = () => {
         if (showRequirements === 'always') return true;
-        if (showRequirements === 'never') return !isFocused;
+        if (showRequirements === 'never') return false;
         if (showRequirements === 'onFocus') return isFocused;
         return false;
-    }
+    };
 
     const checkLength = () => password.length >= length;
     const checkCapitalLetter = () => /[A-Z]/.test(password);
@@ -90,13 +93,14 @@ const PasswordStrengthMeter: React.FC<PasswordStrengthMeterProps> = (
             </View>
 
             <View style={styles.meterContainer}>
-                <View style={styles.meter}>
+
+                {displayBar && <View style={styles.meter}>
                     <View style={[styles.meterFill, { width: `${calculateStrength()}%` }]} />
-                </View>
-                <Text style={styles.strengthText}>{checkStrength() ? "Strong" : "Weak"}</Text>
+                </View>}
+                {displayStrength && <Text style={styles.strengthText}>{checkStrength() ? "Strong" : "Weak"}</Text>}
             </View>
 
-            {isFocused && showRequirements && (
+            {handleShowRequirements() && (
                 <View style={styles.strengthContainer}>
                     <Text>Requirements:</Text>
                     <View>
