@@ -11,7 +11,7 @@ const CarouselView: React.FC<CarouselItem> = ({ items, visibleCount = 3, visualS
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const { width } = Dimensions.get('window');
-  const itemSize = (width / 3) * 0.5;
+  const itemSize = (width / 3);
 
   const maxHeight = 269;
   const maxWidth = 192;
@@ -38,15 +38,17 @@ const CarouselView: React.FC<CarouselItem> = ({ items, visibleCount = 3, visualS
           const isCenter = index === Math.floor(visibleCount / 2);
           const scale = visualStyle === 'flat' ? 1 : isCenter ? 1 : 0.6;
           const opacity = isCenter ? 1 : 0.4;
-
+          console.log('itemsize' + itemSize)
+          console.log('scale' + itemSize*scale)
+          console.log(maxHeight)
           return (
             <View
               key={index}
               style={[
                 styles.itemContainer,
                 {
-                  width: Math.min(itemSize * scale, maxWidth),
-                  height: Math.min(itemSize * 1.4 * scale, maxHeight),
+                  width: Math.min(itemSize * scale, maxWidth*scale),
+                  height: Math.min(itemSize * 1.4 * scale, maxHeight*scale),
                   opacity,
                 },
               ]}
@@ -59,6 +61,18 @@ const CarouselView: React.FC<CarouselItem> = ({ items, visibleCount = 3, visualS
             </View>
           );
         })}
+      </View>
+      {/* Indicators */}
+      <View style={styles.indicatorContainer}>
+        {items.map((_, index) => (
+          <View
+            key={index}
+            style={[
+              styles.indicator,
+              currentIndex === index && styles.activeIndicator,
+            ]}
+          />
+        ))}
       </View>
       <View style={styles.buttonContainer}>
         <View style={styles.buttonWrapper}>
@@ -102,6 +116,22 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 20,
-    width: '50%',
+    width: 200,
+  },
+  indicatorContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 10,
+  },
+  indicator: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: '#ccc',
+    marginHorizontal: 4,
+  },
+  activeIndicator: {
+    backgroundColor: '#000',
   },
 });

@@ -12,7 +12,7 @@ export default function Index() {
         <PasswordStrengthMeter />
       </View>
       <View style={styles.content}> 
-        <CarouselView items={items} visibleCount={3} visualStyle="round"/>
+        <CarouselView items={items} visibleCount={5} visualStyle="round"/>
       </View>
       <View style={styles.footer}>
         <Text style={styles.footerText}>Footer</Text>
