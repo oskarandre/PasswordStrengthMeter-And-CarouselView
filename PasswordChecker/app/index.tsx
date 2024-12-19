@@ -11,8 +11,8 @@ export default function Index() {
       <View style={styles.passwordContainer}>
         <PasswordStrengthMeter />
       </View>
-      <View style={styles.content}>
-        <CarouselView items={items} visibleCount={3} visualStyle="flat"/>
+      <View style={styles.content}> 
+        <CarouselView items={items} visibleCount={3} visualStyle="round"/>
       </View>
       <View style={styles.footer}>
         <Text style={styles.footerText}>Footer</Text>
@@ -21,11 +21,22 @@ export default function Index() {
   );
 }
 
-const items = Array(5)
-  .fill(null)
-  .map((_, index) => ({
-    color: `hsl(${(index * 40) % 360}, 70%, 50%)`, // Generate random colors
-  }));
+// const items = Array(5)
+//   .fill(null)
+//   .map((_, index) => ({
+//     color: `hsl(${(index * 40) % 360}, 70%, 50%)`, // Generate random colors
+//   }));
+
+const items = [
+  //{ image: require('../PasswordChecker/images/Skyfall.jpg') },
+  // { image: '/images/Shawshank.jpg' },
+  // { image: '/images/TheDarkKnigh.jpg' },
+  { image: require('../app/images/Shawshank.jpg') },
+  { image: require('../app/images/TheDarkKnight.jpg') },
+  { image: require('../app/images/Skyfall.jpg') },
+  
+
+];
 
 const styles = StyleSheet.create({
   container: {
