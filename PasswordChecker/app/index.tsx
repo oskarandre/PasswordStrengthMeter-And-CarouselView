@@ -35,6 +35,7 @@ const items = [
   { image: require('../app/images/TheDarkKnight.jpg') },
   { image: require('../app/images/Skyfall.jpg') },
   
+  
 
 ];
 
