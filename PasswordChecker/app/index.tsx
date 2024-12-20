@@ -12,7 +12,7 @@ export default function Index() {
         <PasswordStrengthMeter />
       </View>
       <View style={styles.content}> 
-        <CarouselView items={items} visibleCount={5} visualStyle="round"/>
+        <CarouselView items={items} visibleCount={3} visualStyle="round"/>
       </View>
       <View style={styles.footer}>
         <Text style={styles.footerText}>Footer</Text>
@@ -28,12 +28,14 @@ export default function Index() {
 //   }));
 
 const items = [
-  //{ image: require('../PasswordChecker/images/Skyfall.jpg') },
-  // { image: '/images/Shawshank.jpg' },
-  // { image: '/images/TheDarkKnigh.jpg' },
   { image: require('../app/images/Shawshank.jpg') },
   { image: require('../app/images/TheDarkKnight.jpg') },
   { image: require('../app/images/Skyfall.jpg') },
+  { image: require('../app/images/Inception.jpg') },
+  { image: require('../app/images/SpiderMan.jpg') },
+  { image: require('../app/images/PulpFiction.jpg') },
+  { image: require('../app/images/Parasite.jpg') },
+
   
   
 
