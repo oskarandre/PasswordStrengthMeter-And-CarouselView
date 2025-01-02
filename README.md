@@ -33,8 +33,8 @@ To set up the project, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/passwordChecklist.git
-   cd passwordChecklist
+   git clone https://github.com/yourusername/PasswordStrengthMeter-And-CarouselView.git
+   cd PasswordStrengthMeter-And-CarouselView
    ```
 
 2. Install dependencies:
