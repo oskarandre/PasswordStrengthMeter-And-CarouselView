@@ -35,6 +35,7 @@ To set up the project, follow these steps:
    ```bash
    git clone https://github.com/yourusername/PasswordStrengthMeter-And-CarouselView.git
    cd PasswordStrengthMeter-And-CarouselView
+   cd PasswordChecker
    ```
 
 2. Install dependencies:
