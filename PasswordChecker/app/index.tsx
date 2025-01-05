@@ -6,7 +6,7 @@ export default function Index() {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>Header</Text>
+        <Text style={styles.headerText}>Lab 4</Text>
       </View>
       <View style={styles.passwordContainer}>
         <PasswordStrengthMeter />
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   passwordContainer: {
     flex: 1,
     alignItems: "center",
-    padding: 20,
+    paddingBlockEnd: 70,
     zIndex: 1,
   },
   footer: {
