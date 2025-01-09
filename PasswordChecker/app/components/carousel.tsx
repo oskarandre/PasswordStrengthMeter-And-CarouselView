@@ -18,19 +18,19 @@ const CarouselView: React.FC<CarouselItem> = ({ items, visibleCount = 3, visualS
 
   // Handler to move to the next item, loops back to the start
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
+    setCurrentIndex((currentIndex) => (currentIndex + 1) % items.length);
   };
 
   // Handler to move to the previous item, loops to the end if at the start
   const handlePrevious = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? items.length - 1 : prevIndex - 1
+    setCurrentIndex((currentIndex) =>
+      currentIndex === 0 ? items.length - 1 : currentIndex - 1
     );
   };
 
   // Calculate visible items based on the current index
   const visibleItems = Array(visibleCount).fill(null).map((_, index) => {
-    const circularIndex = (currentIndex + index) % items.length; // Ensure circular indexing
+    const circularIndex = (currentIndex + index) % items.length; // circular indexing
     return items[circularIndex];
   });
 
@@ -58,7 +58,7 @@ const CarouselView: React.FC<CarouselItem> = ({ items, visibleCount = 3, visualS
               <Image
                 source={item.image}
                 style={styles.image}
-                resizeMode="cover" // Ensure the image covers the container
+                resizeMode="cover" //image covers the container
               />
             </View>
           );

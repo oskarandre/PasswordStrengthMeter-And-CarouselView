@@ -9,7 +9,10 @@ export default function Index() {
         <Text style={styles.headerText}>Lab 4</Text>
       </View>
       <View style={styles.passwordContainer}>
+
         <PasswordStrengthMeter />
+
+        
       </View>
       <View style={styles.content}> 
         <CarouselView items={items} visibleCount={3} visualStyle="round"/>
