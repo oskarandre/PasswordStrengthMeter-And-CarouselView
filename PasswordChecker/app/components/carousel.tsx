@@ -95,48 +95,48 @@ export default CarouselView;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, // Fill available space
-    alignItems: 'center', // Center content horizontally
-    justifyContent: 'center', // Center content vertically
+    flex: 1, 
+    alignItems: 'center', 
+    justifyContent: 'center', 
   },
   header: {
     textAlign: 'center',
-    fontSize: 20, // Font size for header
-    marginVertical: 20, // Vertical spacing for header
+    fontSize: 20, 
+    marginVertical: 20, 
   },
   itemContainer: {
-    marginHorizontal: 5, // Horizontal margin between items
-    borderRadius: 8, // Rounded corners for items
-    overflow: 'hidden', // Ensure content stays within the container
+    marginHorizontal: 5, 
+    borderRadius: 8, 
+    overflow: 'hidden', 
   },
   image: {
-    width: '100%', // Stretch image to container width
-    height: '100%', // Stretch image to container height
+    width: '100%', 
+    height: '100%', 
   },
   buttonWrapper: {
-    flex: 1, // Equal space for each button
-    marginHorizontal: 5, // Space between buttons
+    flex: 1, 
+    marginHorizontal: 5, 
   },
   buttonContainer: {
-    flexDirection: 'row', // Arrange buttons in a row
-    justifyContent: 'space-between', // Space buttons evenly
-    marginTop: 20, // Spacing above buttons
-    width: 200, // Fixed width for button container
+    flexDirection: 'row', 
+    justifyContent: 'space-between', 
+    marginTop: 20, 
+    width: 200, 
   },
   indicatorContainer: {
-    flexDirection: 'row', // Arrange indicators in a row
-    justifyContent: 'center', // Center indicators
-    alignItems: 'center', // Align indicators vertically
-    marginVertical: 10, // Spacing above and below indicators
+    flexDirection: 'row', 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    marginVertical: 10, 
   },
   indicator: {
-    width: 8, // Width of each indicator
-    height: 8, // Height of each indicator
-    borderRadius: 4, // Make indicators circular
-    backgroundColor: '#ccc', // Default color for indicators
-    marginHorizontal: 4, // Space between indicators
+    width: 8, 
+    height: 8, 
+    borderRadius: 4, 
+    backgroundColor: '#ccc', 
+    marginHorizontal: 4, 
   },
   activeIndicator: {
-    backgroundColor: '#000', // Highlight color for active indicator
+    backgroundColor: '#000', 
   },
 });
