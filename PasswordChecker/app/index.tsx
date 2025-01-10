@@ -1,8 +1,11 @@
+import React, { useState } from "react";
 import { Text, View, StyleSheet, ScrollView } from "react-native";
 import PasswordStrengthMeter from "./components/passwordStrengthMeter";
 import CarouselView from "./components/carousel";
 
 export default function Index() {
+  const [password, setPassword] = useState("");
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.header}>
@@ -10,12 +13,17 @@ export default function Index() {
       </View>
       <View style={styles.passwordContainer}>
 
-        <PasswordStrengthMeter />
+        <PasswordStrengthMeter onValidPassword={setPassword}/>
+
+        {/* Displays the valid password */}
+        {password && <Text>Valid Password: {password}</Text>}
 
         
       </View>
       <View style={styles.content}> 
+
         <CarouselView items={items} visibleCount={3} visualStyle="round"/>
+      
       </View>
       <View style={styles.footer}>
         <Text style={styles.footerText}>Footer</Text>
@@ -38,10 +46,6 @@ const items = [
   { image: require('../app/images/SpiderMan.jpg') },
   { image: require('../app/images/PulpFiction.jpg') },
   { image: require('../app/images/Parasite.jpg') },
-
-  
-  
-
 ];
 
 const styles = StyleSheet.create({

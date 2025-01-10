@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button, Dimensions, Image } from 'react-native';
+import { View, StyleSheet, Button, Dimensions, Image } from 'react-native';
 
-interface CarouselItem {
+interface CarouselProps {
   items: Array<{ image: any }>; // Array of objects with 'image' property
   visibleCount?: number;        // Number of items visible at the same time, defaults to 3
   visualStyle?: string;         // Style of carousel, either "round" or "flat", defaults to "round"
 }
 
-const CarouselView: React.FC<CarouselItem> = ({ items, visibleCount = 3, visualStyle = 'round' }) => {
+const CarouselView: React.FC<CarouselProps> = ({ items, visibleCount = 3, visualStyle = 'round' }) => {
   const [currentIndex, setCurrentIndex] = useState(0); // State to track the current index of the carousel
 
   const { width } = Dimensions.get('window'); // Get screen width dynamically
@@ -49,8 +49,8 @@ const CarouselView: React.FC<CarouselItem> = ({ items, visibleCount = 3, visualS
               style={[
                 styles.itemContainer,
                 {
-                  width: Math.min(itemSize * scale, maxWidth * scale), // Limit width by maxWidth
-                  height: Math.min(itemSize * 1.4 * scale, maxHeight * scale), // Limit height by maxHeight
+                  width: Math.min(itemSize * scale, maxWidth * scale), // Apply the scale and limit width by maxWidth
+                  height: Math.min(itemSize * 1.4 * scale, maxHeight * scale), // Apply the scale and limit height by maxHeight
                   opacity,
                 },
               ]}
@@ -58,7 +58,7 @@ const CarouselView: React.FC<CarouselItem> = ({ items, visibleCount = 3, visualS
               <Image
                 source={item.image}
                 style={styles.image}
-                resizeMode="cover" //image covers the container
+                resizeMode="cover" 
               />
             </View>
           );

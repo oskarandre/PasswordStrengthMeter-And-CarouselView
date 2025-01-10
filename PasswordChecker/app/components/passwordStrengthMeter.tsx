@@ -11,6 +11,8 @@ interface PasswordStrengthMeterProps {
     displayBar?: boolean;   // Display the strength of the password in a bar
     showRequirements?: string;    // When to show the requirements, 'always', 'never', or 'onFocus'
     ownStrengthAlgorithm?: boolean;  // Use the custom strength meter depending on the criterias selected
+    onValidPassword?: (password: string) => void;  // Callback function to return a valid password
+
 }
 
 const PasswordStrengthMeter: React.FC<PasswordStrengthMeterProps> = ({
@@ -22,7 +24,8 @@ const PasswordStrengthMeter: React.FC<PasswordStrengthMeterProps> = ({
     displayStrength = true,
     displayBar = true,
     showRequirements = 'onFocus',
-    ownStrengthAlgorithm = false
+    ownStrengthAlgorithm = false,
+    onValidPassword
 }) => {
     const [password, setPassword] = useState('');
     const [isFocused, setIsFocused] = useState(false);
@@ -36,6 +39,20 @@ const PasswordStrengthMeter: React.FC<PasswordStrengthMeterProps> = ({
         const newStrength = checkStrength(text);
         setStrength(newStrength);
         animateBar(calculateStrength(text));
+
+        // If the criterias is met, return the password
+        if (checkCriteria(text) && onValidPassword) {
+            onValidPassword(text);
+        }
+    };
+
+    // Check if the password meets the criteria, only returns true if all criterias are met
+    const checkCriteria = (password: string) => {
+        if (capitalLetter && !checkCapitalLetter(password)) return false;
+        if (numeric && !checkNumeric(password)) return false;
+        if (specialCharacter && !checkSpecialCharacter(password)) return false;
+        if (!checkLength(password)) return false;
+        return true;
     };
 
     const handleFocus = () => {
@@ -227,7 +244,7 @@ const styles = StyleSheet.create({
     meterContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center', // Center the content horizontally
+        justifyContent: 'center', 
         width: 200,
         alignSelf: 'center',
         paddingLeft: 5,
@@ -244,7 +261,7 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     strengthTextContainer: {
-        width: 60, // Set a fixed width for the strength text container
+        width: 60, 
         alignItems: 'center',
     },
     strengthText: {
