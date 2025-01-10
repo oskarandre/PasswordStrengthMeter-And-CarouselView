@@ -16,6 +16,7 @@ The Password Strength Meter evaluates the strength of a password based on variou
 - Real-time password strength evaluation
 - Visual feedback with color indicators
 - Customizable strength criteria
+- Returns password if criterias are fulfilled.
 
 ## Carousel View
 
@@ -55,10 +56,13 @@ To set up the project, follow these steps:
 To use the Password Strength Meter, import the component and include it in your JSX:
 
 ```jsx
+import React, { useState } from "react";
 import PasswordStrengthMeter from './components/PasswordStrengthMeter';
 
 const App = () => (
-  <PasswordStrengthMeter length={12} showRequirements={'always'}  />
+  const [password, setPassword] = useState("");
+
+  <PasswordStrengthMeter length={12} showRequirements={'always'}  onValidPassword={setPassword}/>
 );
 ```
 
@@ -72,6 +76,7 @@ You can add or change the following props:
 - Display the strength of the password in a bar: displayBar (bool)
 - When to show the requirements, 'always', 'never', or 'onFocus': showRequirements (string)
 - Use the custom strength meter depending on the criterias selected: ownStrengthAlgorithm (bool)
+- Callback function to return a valid password (depends on the criteras set): onValidPassword (Callback function)
 
 ### Carousel View
 
